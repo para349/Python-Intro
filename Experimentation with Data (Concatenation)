@@ -1,0 +1,13 @@
+#Strings
+Name = 'Alex'
+Things = 'I like to write, do digital art, play games, and learn new things'
+#Integers
+Age = '16'
+#Booleans
+Fan_of_movies = True
+#Float
+Height = '5.7'
+#Concatenation
+print('My name is: ' + Name)
+print('Things I do: ' + Things)
+print('My age and height are: ' + Age, 'and ' + Height)
