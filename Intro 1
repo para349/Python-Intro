@@ -1,0 +1,10 @@
+#Integers
+print(1)
+print(1+4)
+#Float
+print(1.5)
+#String
+print("Hello)
+#Boolean
+print(False)
+print(True)
