@@ -4,7 +4,7 @@ print(1+4)
 #Float
 print(1.5)
 #String
-print("Hello)
+print("Hello")
 #Boolean
 print(False)
 print(True)
