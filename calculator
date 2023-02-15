@@ -1,0 +1,33 @@
+user_sel = input("For two numbers, do you wish to Add, Subtract, Multiply, Divide?").upper()
+
+user_num1 = int(input("Please enter number one"))
+user_num2 = int(input("Please enter number two"))
+
+def add_numbers(a, b):
+    sum_numbers = a + b
+    return sum_numbers
+
+def sub_numbers(a, b):
+    difference_numbers = a - b
+    return difference_numbers
+
+def mult_numbers(a, b):
+    product_numbers = a * b
+    return product_numbers
+
+def div_numbers(a, b):
+    quotient_numbers = a / b
+    return quotient_numbers
+
+
+if user_sel == "ADD":
+    print(add_numbers(user_num1, user_num2))
+    
+if user_sel == "SUBTRACT":
+    print(sub_numbers(user_num1, user_num2))
+    
+if user_sel == "MULTIPLY":
+    print(mult_numbers(user_num1, user_num2))
+    
+if user_sel == "DIVIDE":
+    print(div_numbers(user_num1, user_num2))
