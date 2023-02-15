@@ -1,33 +1,40 @@
 user_sel = input("For two numbers, do you wish to Add, Subtract, Multiply, Divide?").upper()
-
+#ask for two numbers
 user_num1 = int(input("Please enter number one"))
 user_num2 = int(input("Please enter number two"))
-
+#asks user for two numbers,use int cast to convert from string
 def add_numbers(a, b):
-    sum_numbers = a + b
-    return sum_numbers
-
+    return f"{a} + {b} = {a+b}"
+#function adds two numbers and gives you sum
 def sub_numbers(a, b):
-    difference_numbers = a - b
-    return difference_numbers
+    return f"{a} - {b} = {a-b}"
 
 def mult_numbers(a, b):
-    product_numbers = a * b
-    return product_numbers
+    return f"{a} x {b} = {a*b}"
 
 def div_numbers(a, b):
-    quotient_numbers = a / b
-    return quotient_numbers
+    return f"{a} / {b} = {a/b}"
 
+#IF solution
+# if user_sel == "ADD":
+#     print(add_numbers(user_num1, user_num2))
+#     
+# if user_sel == "SUBTRACT":
+#     print(sub_numbers(user_num1, user_num2))
+#     
+# if user_sel == "MULTIPLY":
+#     print(mult_numbers(user_num1, user_num2))
+#     
+# if user_sel == "DIVIDE":
+#     print(div_numbers(user_num1, user_num2))
 
-if user_sel == "ADD":
-    print(add_numbers(user_num1, user_num2))
-    
-if user_sel == "SUBTRACT":
-    print(sub_numbers(user_num1, user_num2))
-    
-if user_sel == "MULTIPLY":
-    print(mult_numbers(user_num1, user_num2))
-    
-if user_sel == "DIVIDE":
-    print(div_numbers(user_num1, user_num2))
+#Switch solution
+match user_sel:
+    case "ADD":
+        print(add_numbers(user_num1, user_num2))
+    case "SUBTRACT":
+        print(sub_numbers(user_num1, user_num2))
+    case "MULTIPLY":
+        print(mult_numbers(user_num1, user_num2))
+    case "DIVIDE":
+        print(div_numbers(user_num1, user_num2))
