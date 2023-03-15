@@ -1,0 +1,23 @@
+numbers = [0,1,2,3,4,5]
+foods = ["toast", "cereal", "bacon", "pancakes", "eggs", "waffles", "hashbrowns"]
+
+# for num in numbers:
+#     print(numbers[num])
+#     
+# for food in foods:
+#     print(food)
+
+#function that will update with every new item added to list
+def menu():
+    for x in range(len(foods)):
+        print(foods[x])
+
+print("Current Menu")
+menu()
+
+choice = input("What would you like to add to the menu?")
+#append function adds new item to list
+foods.append(choice)
+
+print("New Menu")
+menu()
