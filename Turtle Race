@@ -1,0 +1,76 @@
+############################
+#Turtle Race
+#Alex Mcleod-Stene
+#March 16 202
+#Basic Turtle - Using multiple turtles and random numbers
+############################
+
+import turtle
+import random
+import time
+
+#Turtles
+p1 = turtle.Turtle()
+p1.color("Blue")
+p1.shape("turtle")
+p2 = turtle.Turtle()
+p2.color("red")
+p2.shape("turtle")
+jeff = turtle.Turtle()
+jeff.color("brown")
+jeff.shape("turtle")
+
+#Variebles
+race_w = 300
+race_h = 100
+
+begin1 = (-300,50)
+begin2 = (-300,-50)
+
+#Functions
+#randomspeed sets the turtles speed to a random integer and moves turtle to finish line
+def randomspeed(x):
+  random_speed = random.randint(1,10)
+  x.speed(random_speed)
+  x.fd(2*race_w)
+#racetrack has jeff build the race track
+def racetrack():
+  jeff.penup()
+  jeff.goto(race_w, -race_h)
+  jeff.pendown()
+  for x in range(2):
+    jeff.lt(90)
+    jeff.fd(2*race_h)
+    jeff.lt(90)
+    jeff.fd(2*race_w)
+  jeff.lt(90)
+  jeff.fd(race_h)
+  jeff.lt(90)
+  jeff.fd(2*race_w)
+  jeff.lt(180)
+  jeff.penup()
+  
+racetrack()
+p1.penup()
+p2.penup()
+p1.goto(begin1)
+p2.goto(begin2)
+p1.pendown()
+p2.pendown()
+jeff.goto(0, 150)
+#timer starts when turtle moves then ends after turtle reaches finish line
+time_start_p1 = time.time()
+randomspeed(p1)
+time_finish_p1 = time.time()
+#turtle writes how long it took them
+p1.write(f"{round((time_finish_p1 - time_start_p1), 3)}", align="right", font=("Cooper Black", 15, "italic"))
+time_start_p2 = time.time()
+randomspeed(p2)
+time_finish_p2 = time.time()
+p2.write(f"{round((time_finish_p2 - time_start_p2), 3)}", align="right", font=("Cooper Black", 15, "italic"))
+
+#jeff checks if p1 won or p2 won and declares winner
+if (time_finish_p1 - time_start_p1) < (time_finish_p2 - time_start_p2):
+  jeff.write("P1 WINS!", align="center", font=("Cooper Black", 25, "italic"))
+else:
+  jeff.write("P2 WINS!", align="center", font=("Cooper Black", 25, "italic"))
