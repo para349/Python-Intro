@@ -1,0 +1,68 @@
+###Task: User System that can create a new user (first name, last name, username > tuple) or print all current users. We will use EasyGUI to ask our questions/makeusers and to print our list.
+
+###Access EasyGUI
+import easygui
+###Screen/Output?
+
+###List definitions
+#current_users
+cu = []
+###User Data Types (Temporary)
+##first_name
+fn = ()
+##last_name
+ln = ()
+##username
+un = ()
+
+title = "User System"
+
+###Helper Functions
+#MakeUser - Should ask for three inputs and store a tuple
+def make_user():
+    msg = "What's your first name?"
+    fn = easygui.enterbox(msg, title)
+    msg2 = "What's your last name?"
+    ln = easygui.enterbox(msg2, title)
+    msg3 = "What's your username?"
+    un = easygui.enterbox(msg3, title)
+    cu.append((fn, ln, un),)
+
+#Optional: Check for numerics in first and last - use with make a user?
+#This is how you would do that
+#     msg = "What's your first name?"
+#     fn = easygui.enterbox(msg, title)
+#     if type(fn) != str:
+#         easygui.msgbox("That's a number.")
+#     msg2 = "What's your last name?"
+#     ln = easygui.enterbox(msg2, title)
+#     if type(ln) != str:
+#         easygui.msgbox("That's a number.")
+#     msg3 = "What's your username?"
+#     un = easygui.enterbox(msg3, title)
+#     if type(un) != str:
+#         easygui.msgbox("That's a number.")
+
+#Optional: Random Username based on first name
+
+
+###Main Program Loop
+#Conditions to run our program and ask our questions
+#Way to exit the program (Stops the while loop)
+while exit:
+    while True:
+        make_user()
+        msg2 = "Do you want to add another user?"
+        answer = easygui.ynbox(msg2,title)
+        if answer == True:
+            continue
+        if answer == False:
+            break
+    #PrintUsers - Prints all current users    
+    easygui.msgbox(cu)
+    msg3 = "Do you want to exit the program?"
+    answer2 = easygui.ynbox(msg3,title)
+    if answer2 == False:
+            continue
+    if answer2 == True:
+            break
