@@ -1,11 +1,11 @@
-#################################################
+################################################
 # Name Alex
 # Computer Science 20
 # DATE March 1st 2023
 #
 # Project: Temperature Conversion
 # Purpose: To convert temperatures
-#################################################
+################################################
 
 #import math lets you use math.ceil() which will round up a float
 import math
