@@ -1,3 +1,11 @@
+#################################################
+# Name: Alex
+# Computer Science 20
+# DATE  i dont remember
+#
+# Project: Calculator
+# Purpose: To add, subtract, multiply, and divide numbers.
+#################################################
 user_sel = input("For two numbers, do you wish to Add, Subtract, Multiply, Divide?").upper()
 #ask for two numbers
 user_num1 = int(input("Please enter number one"))
