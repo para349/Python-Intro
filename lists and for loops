@@ -7,7 +7,7 @@ foods = ["toast", "cereal", "bacon", "pancakes", "eggs", "waffles", "hashbrowns"
 # for food in foods:
 #     print(food)
 
-#function that will update with every new item added to list
+#Fuction that will update with every new item added to list
 def menu():
     for x in range(len(foods)):
         print(foods[x])
