@@ -1,11 +1,11 @@
-#################################################
+################################################
 # Name: Alex
 # Computer Science 20
 # DATE April 18th 2023
 #
 # Project: User System
 # Purpose: User System that can create a new user (first name, last name, username > tuple) or print all current users. We will use EasyGUI to ask our questions/makeusers and to print our list.
-#################################################
+################################################
 
 ###Access EasyGUI
 import easygui
