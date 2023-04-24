@@ -8,10 +8,10 @@
 #################################################
 #https://easygui.sourceforge.net/tutorial.html#integerbox
 
-#import random so i could randomize list, and import easygui so the text boxes will work
+#Import random so i could randomize list, and import easygui so the text boxes will work
 import random
 import easygui as easy
-#title for textbox
+#Title for textbox
 title = "MadLib"
 
 #define question to decide weather it'll guide or randomize your madlib
@@ -32,11 +32,11 @@ def main_question():
 main = main_question()
 
 if main == True:
-#shows you what needs to be filled and gives you 3 choices
+#Shows you what needs to be filled and gives you 3 choices
   msg = "I walk through the color jungle. I take out my_______________(adjective) canteen."
   choices = ["silly", "wacky", "funny"]
   adjective1 = easy.choicebox(msg, title, choices)
-#does the sane thing as code above but shows you the choice you made
+#Does the sane thing as code above but shows you the choice you made
   if adjective1 == ("silly") or adjective1 == ("wacky") or adjective1 == ("funny"):
     msg = f"I walk through the color jungle. I take out my {adjective1.upper()} canteen. I see a(n) ________(adjective) parrot."
     choices = ["goofy", "looney", "evil"]
@@ -56,11 +56,11 @@ if main == False:
   adjective1 = ["silly", "wacky", "funny"]
   adjective2 = ["goofy", "looney", "evil"]
   singverb = ["walks", "runs", "drives"]
-#randomizes the list
+#Randomizes the list
   random.shuffle(adjective1)
   random.shuffle(adjective2)
   random.shuffle(singverb)
-#picks first option in randomized list
+#Picks first option in randomized list
   adjective1 = adjective1[0]
   adjective2 = adjective2[0]
   singverb = singverb[0]
