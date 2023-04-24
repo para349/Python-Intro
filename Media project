@@ -38,7 +38,7 @@ def r_animated_short():
   input("Do you want to watch Trois Petits Chats, Fueled, or Model Citizen? ")
 
 
-#Check for which option user picks
+#Check for which option user picks: live action
 if age == "Friendly" and genre == "Live Action" and length == "Feature-Length Film":
   pg_liveaction_long()
 #Use elif to check for other options user could have picked  
@@ -48,7 +48,8 @@ elif age == "Friendly" and genre == "Live Action" and length == "Short Film":
   pg_liveaction_short()
 elif age == "Mature" and genre == "Live Action" and length == "Short Film":
   r_liveaction_short()
-
+  
+#Check for which option user picks: animated
 if age == "Friendly" and genre == "Animated" and length == "Feature-Length Film":
   pg_animated_long()
 elif age == "Mature" and genre == "Animated" and length == "Feature-Length Film":
