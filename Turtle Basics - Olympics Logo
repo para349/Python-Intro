@@ -1,11 +1,11 @@
-#################################################
+################################################
 # Name: Alex
 # Computer Science 20
 # DATE March 15th 2023
 #
 # Project: Turtle Basics - Olympics Logo
 # Purpose: To use the Turtle module to draw the Olympics logo
-#################################################
+################################################
 """
 In this activity you will be using the basics of Turtle to draw out the Olympics logo.
 
