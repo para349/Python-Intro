@@ -1,4 +1,5 @@
-import pygame, sys, random
+import pygame, sys
+from random import randint, uniform
 
 #Game Setup
 pygame.init()
@@ -18,7 +19,7 @@ laser_rect = laser.get_rect(midbottom = ship_rect.midtop)
 laser_list = []
 #Asteroid
 asteroid = pygame.image.load("./Sprites/asteroid.png").convert_alpha()
-asteroid_rect = asteroid.get_rect(center = (random.randint(0, 1280),0))
+asteroid_rect = asteroid.get_rect(center = (randint(0, 1280),0))
 asteroid_list = []
 
 #Laser Functions
@@ -29,10 +30,15 @@ def laser_update(laser_list):
             laser_list.remove(rect)
 
 #Asteroid Functions
-def asteroid_update(asteroid_list):
-    for rect in asteroid_list:
-        rect.y += 1
+def asteroid_update(asteroid_list, speed=1):
+    for asteroid_tuple in asteroid_list:
+        direction = asteroid_tuple[1]
+        asteroid_rect = asteroid_tuple[0]
+        asteroid_rect.center += direction*speed
         
+asteroid_spawn_rate = 500
+asteroid_timer = pygame.event.custom_type()
+pygame.time.set_timer(asteroid_timer, asteroid_spawn_rate)
 
 #def MousePosition():x
 #  print(pygame.mouse.get_pos())
@@ -47,7 +53,14 @@ while True:
         if event.button == 1:
             laser_rect = laser.get_rect(midbottom = ship_rect.midtop)
             laser_list.append(laser_rect)
-  asteroid_list.append(asteroid_rect)
+    if event.type == asteroid_timer:
+        pos_x = randint(-100,SCREEN_W+100)
+        pos_y = randint(-100,-50)
+        spawn_point = (pos_x,pos_y)
+        asteroid_rect = asteroid.get_rect(center = spawn_point)
+        spawn_direction = pygame.math.Vector2(uniform(-0.5,0.5),uniform(0.2,1.0))
+        asteroid_list.append((asteroid_rect,spawn_direction))
+
   clock.tick(60)
   
   #Player Movement
@@ -61,9 +74,8 @@ while True:
   display_surface.blit(ship,ship_rect,)
   #display_surface.blit(laser,laser_rect)
   for rect in asteroid_list:
-      display_surface.blit(asteroid,rect)
+      display_surface.blit(asteroid,)
   for rect in laser_list:
       display_surface.blit(laser,rect)
 
   pygame.display.update()
-
