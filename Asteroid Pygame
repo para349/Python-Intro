@@ -61,17 +61,17 @@ while True:
         pos_y = randint(-100,-50)
         spawn_point = (pos_x,pos_y)
         asteroid_rect = asteroid.get_rect(center = spawn_point)
-        spawn_direction = pygame.math.Vector2(uniform(-2,2),uniform(0.2,1.0))
+        spawn_direction = pygame.math.Vector2(uniform(-1,1),uniform(0.2,1.0))
         asteroid_list.append((asteroid_rect,spawn_direction))
 
   clock.tick(60)
   
   #Player Movement
-  ship_rect.center = pygame.mouse.get_pos()
+  ship_rect.midtop = pygame.mouse.get_pos()
   
   #Object Movement
   laser_update(laser_list)
-  asteroid_update(asteroid_list)
+  asteroid_update(asteroid_list, randint(1,10))
   
   #Collisions
   #Ship
@@ -90,10 +90,16 @@ while True:
   #Background
   display_surface.fill((0,0,0))
   display_surface.blit(background_surface,(0,0))
+  
+  pygame.draw.rect(display_surface, "red", ship_rect, width=1)
   display_surface.blit(ship,ship_rect,)
+  
+  
   #display_surface.blit(laser,laser_rect)
   for rect in laser_list:
+      pygame.draw.rect(display_surface, "red", laser_rect, width=1)
       display_surface.blit(laser,rect)
   for asteroid_tuple in asteroid_list:
+      pygame.draw.rect(display_surface, "red", asteroid_tuple[0], width=1)
       display_surface.blit(asteroid,asteroid_tuple[0])
   pygame.display.update()
