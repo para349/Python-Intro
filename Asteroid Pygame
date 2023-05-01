@@ -2,6 +2,7 @@ import pygame, sys
 from random import randint, uniform
 
 #Game Setup
+
 pygame.init()
 pygame.display.set_caption('Asteroid Clone - OOP')
 SCREEN_W, SCREEN_H = 1280, 720 
@@ -32,9 +33,11 @@ def laser_update(laser_list):
 #Asteroid Functions
 def asteroid_update(asteroid_list, speed=1):
     for asteroid_tuple in asteroid_list:
-        direction = asteroid_tuple[1]
         asteroid_rect = asteroid_tuple[0]
+        direction = asteroid_tuple[1]
         asteroid_rect.center += direction*speed
+        if asteroid_rect.top > SCREEN_H:
+            asteroid_list.remove(asteroid_tuple)
         
 asteroid_spawn_rate = 500
 asteroid_timer = pygame.event.custom_type()
@@ -58,24 +61,39 @@ while True:
         pos_y = randint(-100,-50)
         spawn_point = (pos_x,pos_y)
         asteroid_rect = asteroid.get_rect(center = spawn_point)
-        spawn_direction = pygame.math.Vector2(uniform(-0.5,0.5),uniform(0.2,1.0))
+        spawn_direction = pygame.math.Vector2(uniform(-2,2),uniform(0.2,1.0))
         asteroid_list.append((asteroid_rect,spawn_direction))
 
   clock.tick(60)
   
   #Player Movement
   ship_rect.center = pygame.mouse.get_pos()
+  
   #Object Movement
   laser_update(laser_list)
   asteroid_update(asteroid_list)
   
+  #Collisions
+  #Ship
+  for asteroid_tuple in asteroid_list:
+      asteroid_rect = asteroid_tuple[0]
+      if ship_rect.colliderect(asteroid_rect):
+          pygame.quit()
+          sys.exit()
+  #Lasers
+  for asteroid_tuple in asteroid_list:
+      for laser_rect in laser_list:
+          if asteroid_tuple[0].colliderect(laser_rect):
+              asteroid_list.remove(asteroid_tuple)
+              laser_list.remove(laser_rect)
+    
+  #Background
   display_surface.fill((0,0,0))
   display_surface.blit(background_surface,(0,0))
   display_surface.blit(ship,ship_rect,)
   #display_surface.blit(laser,laser_rect)
-  for rect in asteroid_list:
-      display_surface.blit(asteroid,)
   for rect in laser_list:
       display_surface.blit(laser,rect)
-
+  for asteroid_tuple in asteroid_list:
+      display_surface.blit(asteroid,asteroid_tuple[0])
   pygame.display.update()
