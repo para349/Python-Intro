@@ -49,6 +49,25 @@ def laser_update(laser_list):
         if rect.bottom < 0:
             laser_list.remove(rect)
 
+cooldown = True
+cooldown_time = None
+cooldown_interval = 500
+
+def laser_cooldown():
+    global cooldown, cooldown_time, cooldown_interval
+    if not cooldown:
+        current_time = pygame.time.get_ticks()
+        if (current_time - cooldown_time) > cooldown_interval:
+            cooldown = True
+def laser_shoot():
+    global cooldown, cooldown_time, cooldown_interval
+    if cooldown:
+        cooldown_time = pygame.time.get_ticks()
+        laser_rect = laser.get_rect(midbottom = ship_rect.midtop)
+        laser_list.append(laser_rect)
+        laser_sound.play()
+        cooldown = False
+    
 #Asteroid Functions
 def asteroid_update(asteroid_list, speed=1):
     for asteroid_tuple in asteroid_list:
@@ -71,13 +90,11 @@ while True:
     if event.type == pygame.QUIT:
       pygame.quit()
       sys.exit()
-    if game_state == "start_menu":
-        draw_start_menu()
+
     if event.type == pygame.MOUSEBUTTONDOWN:
-        if event.button == 1:
-            laser_rect = laser.get_rect(midbottom = ship_rect.midtop)
-            laser_list.append(laser_rect)
-            laser_sound.play()
+        if event.button == 1 and cooldown:
+            laser_cooldown()
+            laser_shoot()
             
     if event.type == asteroid_timer:
         pos_x = randint(-100,SCREEN_W+100)
@@ -87,51 +104,51 @@ while True:
         spawn_direction = pygame.math.Vector2(uniform(-1,1),uniform(0.2,1.0))
         asteroid_list.append((asteroid_rect,spawn_direction))
 
-  if game_state == "game":
-      clock.tick(60)
+
+    clock.tick(60)
       
-      #Player Movement
-      ship_rect.midtop = pygame.mouse.get_pos()
+    #Player Movement
+    ship_rect.midtop = pygame.mouse.get_pos()
       
-      #Object Movement
-      laser_update(laser_list)
-      asteroid_update(asteroid_list, randint(1,10))
+    #Object Movement
+    laser_update(laser_list)
+    asteroid_update(asteroid_list, randint(1,10))
       
-      #Score Update
-      score_text = font.render(f'Score: {score}', True, (255, 255, 255))
+    #Score Update
+    score_text = font.render(f'Score: {score}', True, (255, 255, 255))
       
 
-      #Collisions
-      #Ship
-      for asteroid_tuple in asteroid_list:
-          asteroid_rect = asteroid_tuple[0]
-          if ship_rect.colliderect(asteroid_rect):
-              pygame.quit()
-              sys.exit()
-      #Lasers
-      for asteroid_tuple in asteroid_list:
-          for laser_rect in laser_list:
-              if asteroid_tuple[0].colliderect(laser_rect):
-                  asteroid_list.remove(asteroid_tuple)
-                  laser_list.remove(laser_rect)
-                  explode_sound.play()
-                  score += score_increment
+    #Collisions
+    #Ship
+    for asteroid_tuple in asteroid_list:
+        asteroid_rect = asteroid_tuple[0]
+        if ship_rect.colliderect(asteroid_rect):
+            pygame.quit()
+            sys.exit()
+    #Lasers
+    for asteroid_tuple in asteroid_list:
+        for laser_rect in laser_list:
+            if asteroid_tuple[0].colliderect(laser_rect):
+                asteroid_list.remove(asteroid_tuple)
+                laser_list.remove(laser_rect)
+                explode_sound.play()
+                score += score_increment
         
-      #Background
-      display_surface.fill((0,0,0))
-      display_surface.blit(background_surface,(0,0))
-      display_surface.blit(score_text, (10, 10))
+    #Background
+    display_surface.fill((0,0,0))
+    display_surface.blit(background_surface,(0,0))
+    display_surface.blit(score_text, (10, 10))
       
-      #pygame.draw.rect(display_surface, "red", ship_rect, width=1)
-      display_surface.blit(ship,ship_rect,)
+    #pygame.draw.rect(display_surface, "red", ship_rect, width=1)
+    display_surface.blit(ship,ship_rect,)
       
       
-      #display_surface.blit(laser,laser_rect)
-      for rect in laser_list:
-          #pygame.draw.rect(display_surface, "red", laser_rect, width=1)
-          display_surface.blit(laser,rect)
-      for asteroid_tuple in asteroid_list:
-          #pygame.draw.rect(display_surface, "red", asteroid_tuple[0], width=1)
-          display_surface.blit(asteroid,asteroid_tuple[0])
-      pygame.display.update()
+    #display_surface.blit(laser,laser_rect)
+    for rect in laser_list:
+        #pygame.draw.rect(display_surface, "red", laser_rect, width=1)
+        display_surface.blit(laser,rect)
+    for asteroid_tuple in asteroid_list:
+        #pygame.draw.rect(display_surface, "red", asteroid_tuple[0], width=1)
+        display_surface.blit(asteroid,asteroid_tuple[0])
+    pygame.display.update()
 
